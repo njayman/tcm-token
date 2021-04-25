@@ -18,6 +18,7 @@ import {
   PanelHeader,
   PanelBody,
 } from "./../../components/panel/panel.jsx";
+// import Actions from "./BasicInfoFields/Action";
 
 //import { Collapse, CardHeader, CardBody, Card } from 'reactstrap';
 //import Actions from "./../../../src/components/ticket/Action";
@@ -286,15 +287,25 @@ class TicketTabs extends React.Component {
                   </Nav>
                   <div>
                     <div className="btn-group mx-2">
-                      <button className="btn btn-default">Action</button>
+                      <button className="btn btn-sm btn-default">Action</button>
                       <UncontrolledButtonDropdown>
                         <DropdownToggle caret color="default"></DropdownToggle>
                         <DropdownMenu>
-                          <DropdownItem>Action 1</DropdownItem>
-                          <DropdownItem>Action 2</DropdownItem>
-                          <DropdownItem>Action 3</DropdownItem>
-                          <DropdownItem divider></DropdownItem>
-                          <DropdownItem>Action 4</DropdownItem>
+                          <DropdownItem>
+                            <i className="fa fa-save"></i> Save as PDF
+                          </DropdownItem>
+                          <DropdownItem>
+                            <i className="fas fa-edit"></i> Edit
+                          </DropdownItem>
+                          <DropdownItem>
+                            <i className="fas fa-print"></i> Print
+                          </DropdownItem>
+                          <DropdownItem>
+                            <i className="fas fa-archive"></i> Archive
+                          </DropdownItem>
+                          <DropdownItem>
+                            <i className="ion-md-share"></i> Share{" "}
+                          </DropdownItem>
                         </DropdownMenu>
                       </UncontrolledButtonDropdown>
                     </div>
