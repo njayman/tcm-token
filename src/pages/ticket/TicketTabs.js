@@ -76,7 +76,27 @@ class TicketTabs extends React.Component {
                   <Nav tabs>
                     <NavItem>
                       <NavLink
-                        style={{ background: "#FFC69F" }}
+                        style={{
+                          background: `${
+                            this.state.activeTab === "1" ? "#ffffff" : "#FFC69F"
+                          }`,
+                          borderTop: `${
+                            this.state.activeTab === "1"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          borderLeft: `${
+                            this.state.activeTab === "1"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          borderRight: `${
+                            this.state.activeTab === "1"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          cursor: "default",
+                        }}
                         className={classnames({
                           active: this.state.activeTab === "1",
                         })}
@@ -92,7 +112,27 @@ class TicketTabs extends React.Component {
                     </NavItem>
                     <NavItem>
                       <NavLink
-                        style={{ background: "#DED99F" }}
+                        style={{
+                          background: `${
+                            this.state.activeTab === "2" ? "#ffffff" : "#DED99F"
+                          }`,
+                          borderTop: `${
+                            this.state.activeTab === "2"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          borderLeft: `${
+                            this.state.activeTab === "2"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          borderRight: `${
+                            this.state.activeTab === "2"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          cursor: "default",
+                        }}
                         className={classnames({
                           active: this.state.activeTab === "2",
                         })}
@@ -108,7 +148,27 @@ class TicketTabs extends React.Component {
                     </NavItem>
                     <NavItem>
                       <NavLink
-                        style={{ background: "#FFC6FF" }}
+                        style={{
+                          background: `${
+                            this.state.activeTab === "3" ? "#ffffff" : "#FFC6FF"
+                          }`,
+                          borderTop: `${
+                            this.state.activeTab === "3"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          borderLeft: `${
+                            this.state.activeTab === "3"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          borderRight: `${
+                            this.state.activeTab === "3"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          cursor: "default",
+                        }}
                         className={classnames({
                           active: this.state.activeTab === "3",
                         })}
@@ -123,7 +183,27 @@ class TicketTabs extends React.Component {
 
                     <NavItem>
                       <NavLink
-                        style={{ background: "#FFF5AD" }}
+                        style={{
+                          background: `${
+                            this.state.activeTab === "4" ? "#ffffff" : "#FFF5AD"
+                          }`,
+                          borderTop: `${
+                            this.state.activeTab === "4"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          borderLeft: `${
+                            this.state.activeTab === "4"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          borderRight: `${
+                            this.state.activeTab === "4"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          cursor: "default",
+                        }}
                         className={classnames({
                           active: this.state.activeTab === "4",
                         })}
@@ -137,7 +217,27 @@ class TicketTabs extends React.Component {
                     </NavItem>
                     <NavItem>
                       <NavLink
-                        style={{ background: "#A2F5AD" }}
+                        style={{
+                          background: `${
+                            this.state.activeTab === "5" ? "#ffffff" : "#A2F5AD"
+                          }`,
+                          borderTop: `${
+                            this.state.activeTab === "5"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          borderLeft: `${
+                            this.state.activeTab === "5"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          borderRight: `${
+                            this.state.activeTab === "5"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          cursor: "default",
+                        }}
                         className={classnames({
                           active: this.state.activeTab === "5",
                         })}
@@ -151,7 +251,27 @@ class TicketTabs extends React.Component {
                     </NavItem>
                     <NavItem>
                       <NavLink
-                        style={{ background: "#FFFFC9" }}
+                        style={{
+                          background: `${
+                            this.state.activeTab === "6" ? "#ffffff" : "#FFFFC9"
+                          }`,
+                          borderTop: `${
+                            this.state.activeTab === "6"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          borderLeft: `${
+                            this.state.activeTab === "6"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          borderRight: `${
+                            this.state.activeTab === "6"
+                              ? "1px solid #b6c2c9"
+                              : "none"
+                          }`,
+                          cursor: "default",
+                        }}
                         className={classnames({
                           active: this.state.activeTab === "6",
                         })}
