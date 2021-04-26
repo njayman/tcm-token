@@ -94,9 +94,7 @@ export default function FilePreview() {
             ></i>
           )}
           <CardBody style={{ background: "#ededed", textAlign: "center" }}>
-            <CardText>
-              <h4>{asset?.name}</h4>
-            </CardText>
+            <CardText as="h1">{asset?.name}</CardText>
           </CardBody>
         </Card>
       ))}

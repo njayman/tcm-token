@@ -34,9 +34,11 @@ class TicketTabs extends React.Component {
     this.state = {
       activeTab: "1",
       dropdownOpen: false,
+      readOnly: true,
     };
     this.toggleCollapse = this.toggleCollapse.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.setReadOnly = this.setReadOnly.bind(this);
   }
   toggleCollapse() {
     console.log("lll");
@@ -51,6 +53,8 @@ class TicketTabs extends React.Component {
       });
     }
   }
+
+  setReadOnly = () => this.setState({ readOnly: !this.state.readOnly });
 
   render() {
     return (
@@ -297,14 +301,15 @@ class TicketTabs extends React.Component {
                         toggle={this.toggle}
                       >
                         <DropdownToggle color="default" caret>
-                          Action
+                          Actions
                         </DropdownToggle>
                         <DropdownMenu>
                           <DropdownItem>
                             <i className="fa fa-save"></i> Save as PDF
                           </DropdownItem>
-                          <DropdownItem>
-                            <i className="fas fa-edit"></i> Edit
+                          <DropdownItem onClick={() => this.setReadOnly()}>
+                            <i className="fas fa-edit"></i>
+                            Edit
                           </DropdownItem>
                           <DropdownItem>
                             <i className="fas fa-print"></i> Print
@@ -323,7 +328,10 @@ class TicketTabs extends React.Component {
 
                 <TabContent activeTab={this.state.activeTab}>
                   <TabPane tabId="1">
-                    <BasicInfo />
+                    <BasicInfo
+                      readOnly={this.state.readOnly}
+                      setReadOnly={() => this.setReadOnly()}
+                    />
                   </TabPane>
                   <TabPane tabId="2">
                     <h4>Data input in spreadsheet</h4>

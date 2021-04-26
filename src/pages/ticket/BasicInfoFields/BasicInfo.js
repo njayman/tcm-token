@@ -7,8 +7,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 import { Panel, PanelBody } from "./../../../components/panel/panel.jsx";
 import FilePreview from "./FilePreview";
-export default function BasicInfo() {
-  const [readOnly, setReadOnly] = useState(true);
+export default function BasicInfo({ readOnly, setReadOnly }) {
   const [modalCreatedOn, setModalCreatedOn] = useState(false);
   const [modalDeadline, setModalDeadline] = useState(false);
   const toggleModal = (name) => {
