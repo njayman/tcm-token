@@ -6,10 +6,10 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledButtonDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  ButtonDropdown,
 } from "reactstrap";
 import classnames from "classnames";
 import BasicInfo from "./BasicInfoFields/BasicInfo";
@@ -33,12 +33,17 @@ class TicketTabs extends React.Component {
 
     this.state = {
       activeTab: "1",
+      dropdownOpen: false,
     };
     this.toggleCollapse = this.toggleCollapse.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
   toggleCollapse() {
     console.log("lll");
   }
+
+  toggle = () => this.setState({ dropdownOpen: !this.state.dropdownOpen });
+
   toggleTab(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -287,9 +292,13 @@ class TicketTabs extends React.Component {
                   </Nav>
                   <div>
                     <div className="btn-group mx-2">
-                      <button className="btn btn-sm btn-default">Action</button>
-                      <UncontrolledButtonDropdown>
-                        <DropdownToggle caret color="default"></DropdownToggle>
+                      <ButtonDropdown
+                        isOpen={this.state.dropdownOpen}
+                        toggle={this.toggle}
+                      >
+                        <DropdownToggle color="default" caret>
+                          Action
+                        </DropdownToggle>
                         <DropdownMenu>
                           <DropdownItem>
                             <i className="fa fa-save"></i> Save as PDF
@@ -307,7 +316,7 @@ class TicketTabs extends React.Component {
                             <i className="ion-md-share"></i> Share{" "}
                           </DropdownItem>
                         </DropdownMenu>
-                      </UncontrolledButtonDropdown>
+                      </ButtonDropdown>
                     </div>
                   </div>
                 </div>
