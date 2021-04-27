@@ -166,7 +166,7 @@ export default function BasicInfo({ readOnly, setReadOnly }) {
                     initialValue={new Date()}
                     inputProps={{
                       placeholder: "Datepicker",
-                      disabled: readOnly,
+                      disabled: true,
                     }}
                     closeOnSelect={true}
                   />
