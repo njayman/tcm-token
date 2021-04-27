@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import Priority from "./Priority";
 import Category from "./Category";
 import Status from "./Status";
-import DateRangePicker from "./DateRangePicker";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import "react-datetime/css/react-datetime.css";
+// import DateRangePicker from "./DateRangePicker";
+import DateTime from "react-datetime";
+// import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-import { Panel, PanelBody } from "./../../../components/panel/panel.jsx";
+import { Panel, PanelBody } from "../../../components/panel/panel.jsx";
 import FilePreview from "./FilePreview";
 export default function BasicInfo({ readOnly, setReadOnly }) {
-  const [modalCreatedOn, setModalCreatedOn] = useState(false);
-  const [modalDeadline, setModalDeadline] = useState(false);
-  const toggleModal = (name) => {
-    switch (name) {
-      case "modalCreatedOn":
-        setModalCreatedOn((mco) => !mco);
-        break;
-      case "modalDeadline":
-        setModalDeadline((mdl) => !mdl);
-        break;
-      default:
-        break;
-    }
-  };
+  // const [modalCreatedOn, setModalCreatedOn] = useState(false);
+  // const [modalDeadline, setModalDeadline] = useState(false);
+  // const toggleModal = (name) => {
+  //   switch (name) {
+  //     case "modalCreatedOn":
+  //       setModalCreatedOn((mco) => !mco);
+  //       break;
+  //     case "modalDeadline":
+  //       setModalDeadline((mdl) => !mdl);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
   return (
     <>
       <div className="row">
@@ -158,7 +160,17 @@ export default function BasicInfo({ readOnly, setReadOnly }) {
               <div className="form-group row m-b-15">
                 <label className="col-sm-3 col-form-label">Created On</label>
                 <div className="col-sm-9">
-                  <button
+                  <DateTime
+                    // className={` datetime`}
+
+                    initialValue={new Date()}
+                    inputProps={{
+                      placeholder: "Datepicker",
+                      disabled: readOnly,
+                    }}
+                    closeOnSelect={true}
+                  />
+                  {/* <button
                     disabled={readOnly}
                     onClick={() => toggleModal("modalCreatedOn")}
                     className="btn btn-sm btn-default"
@@ -190,13 +202,22 @@ export default function BasicInfo({ readOnly, setReadOnly }) {
                         Done
                       </button>
                     </ModalFooter>
-                  </Modal>
+                  </Modal> */}
                 </div>
               </div>
               <div className="form-group row m-b-15">
                 <label className="col-sm-3 col-form-label">Deadline</label>
                 <div className="col-sm-9">
-                  <button
+                  <DateTime
+                    // className={` datetime`}
+                    initialValue={new Date()}
+                    inputProps={{
+                      placeholder: "Datepicker",
+                      disabled: readOnly,
+                    }}
+                    closeOnSelect={true}
+                  />
+                  {/* <button
                     disabled={readOnly}
                     onClick={() => toggleModal("modalDeadline")}
                     className="btn btn-sm btn-default"
@@ -228,7 +249,7 @@ export default function BasicInfo({ readOnly, setReadOnly }) {
                         Done
                       </button>
                     </ModalFooter>
-                  </Modal>
+                  </Modal> */}
                 </div>
               </div>
               <div className="form-group row m-b-15">
