@@ -9,7 +9,7 @@ export default function ReactSelect({ options, selectedValue, ...props }) {
       ...styles,
       minHeight: "31px",
       height: "31px",
-      width: "120px",
+      width: "100%",
       backgroundColor:
         value === "feature-request"
           ? "#ff5b57"
@@ -61,7 +61,7 @@ export default function ReactSelect({ options, selectedValue, ...props }) {
 
   return (
     <Select
-      maxMenuHeight={90}
+      maxMenuHeight={300}
       onChange={onChange}
       styles={customStyles(selected)}
       options={options}

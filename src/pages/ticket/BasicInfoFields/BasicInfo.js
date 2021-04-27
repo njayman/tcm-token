@@ -259,7 +259,12 @@ export default function BasicInfo({ readOnly, setReadOnly }) {
                     >
                       Cancel
                     </button>
-                    <button className="btn btn-primary">Submit</button>
+                    <button
+                      onClick={() => setReadOnly((ro) => !ro)}
+                      className="btn btn-primary"
+                    >
+                      Submit
+                    </button>
                   </>
                 )}
               </p>

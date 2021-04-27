@@ -9,6 +9,20 @@ export default function ReactSelect({ options, selectedValue, ...props }) {
       ...styles,
       minHeight: "31px",
       height: "31px",
+      width: "100%",
+      backgroundColor:
+        value === "urgent"
+          ? "#ff5b57"
+          : value === "high"
+          ? "#f1c40f"
+          : value === "normal"
+          ? "#2ecc71"
+          : value === "low"
+          ? "#2b9fc1"
+          : "BFFF00",
+    }),
+    singleValue: (styles) => ({
+      ...styles,
       color:
         value === "urgent"
           ? "white"
@@ -19,19 +33,7 @@ export default function ReactSelect({ options, selectedValue, ...props }) {
           : value === "low"
           ? "white"
           : "white",
-      width: "120px",
-      backgroundColor:
-        value === "urgent"
-          ? "#ff5b57"
-          : value === "high"
-          ? "#f1c40f"
-          : value === "normal"
-          ? "#2ecc71"
-          : value === "low"
-          ? "#2b9fc1"
-          : "white",
     }),
-
     option: (provided) => ({
       ...provided,
       padding: "20px",
@@ -45,13 +47,13 @@ export default function ReactSelect({ options, selectedValue, ...props }) {
   };
 
   const displayItem = (selected) => {
-    const item = options?.find((x) => x.value === selected);
+    const item = options.find((x) => x.value === selected);
     return item ? item : { value: "", label: "" };
   };
 
   return (
     <Select
-      maxMenuHeight={90}
+      maxMenuHeight={300}
       onChange={onChange}
       styles={customStyles(selected)}
       options={options}
