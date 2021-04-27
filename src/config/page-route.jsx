@@ -66,7 +66,7 @@ import { Redirect } from "react-router";
 // import LoginV3 from './../pages/user/login-v3.js';
 // import RegisterV3 from './../pages/user/register-v3.js';
 // import HelperCSS from './../pages/helper/helper-css.js';
-import TicketTabs from "./../pages/ticket/TicketTabs";
+import TicketProfile from "./../pages/ticket/TicketProfile";
 const routes = [
   {
     path: "/",
@@ -76,7 +76,7 @@ const routes = [
   {
     path: "/tickets",
     exact: true,
-    component: () => <TicketTabs />,
+    component: () => <TicketProfile />,
   },
   // {
   //   path: '/dashboard/v1',

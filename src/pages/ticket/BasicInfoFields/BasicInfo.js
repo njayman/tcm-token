@@ -54,19 +54,48 @@ export default function BasicInfo({ readOnly, setReadOnly }) {
               <div className="form-group row m-b-15">
                 <label className="col-sm-3 col-form-label">Category</label>
                 <div className="col-sm-9">
-                  <Category readOnly={readOnly} />
+                  <Category
+                    readOnly={readOnly}
+                    selectedValue={"feature-request"}
+                    options={[
+                      { value: "feature-request", label: "feature-request" },
+                      { value: "disconnection", label: "disconnection" },
+                      { value: "bug-error", label: "bug-error" },
+                      { value: "sales", label: "sales" },
+                      { value: "complaint", label: "complaint" },
+                      { value: "orders", label: "orders" },
+                    ]}
+                  />
                 </div>
               </div>
               <div className="form-group row m-b-15">
                 <label className="col-sm-3 col-form-label">Priority</label>
                 <div className="col-sm-9">
-                  <Priority readOnly={readOnly} />
+                  <Priority
+                    readOnly={readOnly}
+                    selectedValue={"normal"}
+                    options={[
+                      { value: "high", label: "high" },
+                      { value: "normal", label: "normal" },
+                      { value: "low", label: "low" },
+                      { value: "urgent", label: "urgent" },
+                    ]}
+                  />
                 </div>
               </div>
               <div className="form-group row m-b-15">
-                <label className="col-sm-3 col-form-label">Priority</label>
+                <label className="col-sm-3 col-form-label">Status</label>
                 <div className="col-sm-9">
-                  <Status readOnly={readOnly} />
+                  <Status
+                    readOnly={readOnly}
+                    selectedValue={"open"}
+                    options={[
+                      { value: "open", label: "open" },
+                      { value: "onhold", label: "onhold" },
+                      { value: "closed", label: "closed" },
+                      { value: "reopen", label: "reopen" },
+                    ]}
+                  />
                 </div>
               </div>
               <div className="form-group row m-b-15">

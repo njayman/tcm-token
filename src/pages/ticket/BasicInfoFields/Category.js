@@ -9,20 +9,6 @@ export default function ReactSelect({ options, selectedValue, ...props }) {
       ...styles,
       minHeight: "31px",
       height: "31px",
-      color:
-        value === "feature-request"
-          ? "white"
-          : value === "disconnection"
-          ? "yellow"
-          : value === "bug-error"
-          ? "white"
-          : value === "sales"
-          ? "white"
-          : value === "complaint"
-          ? "pink"
-          : value === "orders"
-          ? "lime"
-          : "white",
       width: "120px",
       backgroundColor:
         value === "feature-request"
@@ -37,9 +23,25 @@ export default function ReactSelect({ options, selectedValue, ...props }) {
           ? "#f1c40f"
           : value === "orders"
           ? "#2ecc71"
+          : "BFFF00",
+    }),
+    singleValue: (styles) => ({
+      ...styles,
+      color:
+        value === "feature-request"
+          ? "white"
+          : value === "disconnection"
+          ? "white"
+          : value === "bug-error"
+          ? "white"
+          : value === "sales"
+          ? "white"
+          : value === "complaint"
+          ? "white"
+          : value === "orders"
+          ? "white"
           : "white",
     }),
-
     option: (provided) => ({
       ...provided,
       padding: "20px",
@@ -65,7 +67,6 @@ export default function ReactSelect({ options, selectedValue, ...props }) {
       options={options}
       placeholder={"Select Category"}
       value={displayItem(selected)}
-      read
       isDisabled={props.readOnly}
       {...props}
     />

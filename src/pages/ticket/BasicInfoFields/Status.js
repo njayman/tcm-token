@@ -9,16 +9,6 @@ export default function ReactSelect({ options, selectedValue, ...props }) {
       ...styles,
       minHeight: "31px",
       height: "31px",
-      color:
-        value === "open"
-          ? "white"
-          : value === "onhold"
-          ? "white"
-          : value === "closed"
-          ? "black"
-          : value === "reopen"
-          ? "white"
-          : "white",
       width: "120px",
       backgroundColor:
         value === "open"
@@ -31,7 +21,19 @@ export default function ReactSelect({ options, selectedValue, ...props }) {
           ? "#BFFF00"
           : "#2b9fc1",
     }),
-
+    singleValue: (styles) => ({
+      ...styles,
+      color:
+        value === "open"
+          ? "white"
+          : value === "onhold"
+          ? "white"
+          : value === "closed"
+          ? "black"
+          : value === "reopen"
+          ? "black"
+          : "white",
+    }),
     option: (provided) => ({
       ...provided,
       color: "black",

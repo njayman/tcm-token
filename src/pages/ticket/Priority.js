@@ -2,23 +2,13 @@ import React, { useState } from "react";
 import Select from "react-select";
 
 export default function ReactSelect({ options, selectedValue, ...props }) {
-  const [selected, setSelected] = useState(selectedValue);
+  const [selected, setSelected] = useState(props.selectedValue);
 
   const customStyles = (value) => ({
     control: (styles) => ({
       ...styles,
       minHeight: "31px",
       height: "31px",
-      color:
-        value === "urgent"
-          ? "white"
-          : value === "high"
-          ? "yellow"
-          : value === "normal"
-          ? "white"
-          : value === "low"
-          ? "white"
-          : "white",
       width: "120px",
       backgroundColor:
         value === "urgent"
@@ -29,9 +19,21 @@ export default function ReactSelect({ options, selectedValue, ...props }) {
           ? "#2ecc71"
           : value === "low"
           ? "#2b9fc1"
+          : "BFFF00",
+    }),
+    singleValue: (styles) => ({
+      ...styles,
+      color:
+        value === "urgent"
+          ? "white"
+          : value === "high"
+          ? "yellow"
+          : value === "normal"
+          ? "white"
+          : value === "low"
+          ? "white"
           : "white",
     }),
-
     option: (provided) => ({
       ...provided,
       padding: "20px",
@@ -57,6 +59,7 @@ export default function ReactSelect({ options, selectedValue, ...props }) {
       options={options}
       placeholder={"Select Priority"}
       value={displayItem(selected)}
+      isDisabled={props.readOnly}
       {...props}
     />
   );
