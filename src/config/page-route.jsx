@@ -66,7 +66,7 @@ import { Redirect } from "react-router";
 // import LoginV3 from './../pages/user/login-v3.js';
 // import RegisterV3 from './../pages/user/register-v3.js';
 // import HelperCSS from './../pages/helper/helper-css.js';
-import TicketProfile from "./../pages/ticket/TicketProfile";
+import TicketProfile from "./../pages/ticketprofile/TicketProfile";
 const routes = [
   {
     path: "/",
