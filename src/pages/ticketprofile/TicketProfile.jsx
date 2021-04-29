@@ -7,7 +7,9 @@ import {
   PanelBody,
 } from "../../components/panel/panel.jsx";
 // import SpreadSheet from "./SpreadSheet";
-import ReusableTabs from "./ReusabeTabs";
+import ReusableTabNavs from "./ReusableTabNavs";
+import ReusableTab from "./ReusableTab";
+import { TabContent } from "reactstrap";
 
 // import Actions from "./BasicInfoFields/Action";
 
@@ -25,12 +27,13 @@ class TicketTabs extends React.Component {
     this.state = {
       dropdownOpen: false,
       readOnly: true,
-      // read: true,
+      activeTab: 1,
     };
-    // this.setReadOnly = this.setReadOnly.bind(this);
+    this.setReadOnly = this.setReadOnly.bind(this);
+    this.setActiveTab = this.setActiveTab.bind(this);
     this.toggleRead = this.toggleRead.bind(this);
   }
-
+  setActiveTab = (n) => this.setState({ activeTab: n });
   actions = [
     {
       label: "Save as PDF",
@@ -61,7 +64,7 @@ class TicketTabs extends React.Component {
 
   toggleRead = () => this.setState({ read: !this.state.read });
 
-  // setReadOnly = () => this.setState({ readOnly: !this.state.readOnly });
+  setReadOnly = () => this.setState({ readOnly: !this.state.readOnly });
 
   render() {
     return (
@@ -82,8 +85,10 @@ class TicketTabs extends React.Component {
               <PanelBody>
                 <h1>Ticket name</h1>
 
-                <ReusableTabs
+                <ReusableTabNavs
                   actions={this.actions}
+                  setActiveTab={(n) => this.setActiveTab(n)}
+                  activeTab={this.state.activeTab}
                   navprops={[
                     { label: "Basic information", background: "#FFC69F" },
                     { label: "Data Spreadsheet", background: "#DED99F" },
@@ -92,87 +97,85 @@ class TicketTabs extends React.Component {
                     { label: "Sharing", background: "#A2F5AD" },
                     { label: "Notes", background: "#FFFFC9" },
                   ]}
-                  tabprops={[
-                    {
-                      component: (
-                        <BasicInfo
-                          readOnly={this.state.readOnly}
-                          setReadOnly={() => this.setReadOnly()}
-                        />
-                      ),
-                    },
-                    {
-                      component: (
-                        <>
-                          <h4>Reviews</h4>
-                          <p>
-                            Nullam ac sapien justo. Nam augue mauris, malesuada
-                            non magna sed, feugiat blandit ligula. In tristique
-                            tincidunt purus id iaculis. Pellentesque volutpat
-                            tortor a mauris convallis, sit amet scelerisque
-                            lectus adipiscing.
-                          </p>
-                        </>
-                      ),
-                    },
-                    {
-                      component: (
-                        <>
-                          <h4>Comments</h4>
-                          <p>
-                            Nullam ac sapien justo. Nam augue mauris, malesuada
-                            non magna sed, feugiat blandit ligula. In tristique
-                            tincidunt purus id iaculis. Pellentesque volutpat
-                            tortor a mauris convallis, sit amet scelerisque
-                            lectus adipiscing.
-                          </p>
-                        </>
-                      ),
-                    },
-                    {
-                      component: (
-                        <>
-                          <h4>Reviews</h4>
-                          <p>
-                            Nullam ac sapien justo. Nam augue mauris, malesuada
-                            non magna sed, feugiat blandit ligula. In tristique
-                            tincidunt purus id iaculis. Pellentesque volutpat
-                            tortor a mauris convallis, sit amet scelerisque
-                            lectus adipiscing.
-                          </p>
-                        </>
-                      ),
-                    },
-                    {
-                      component: (
-                        <>
-                          <h4>Sharing</h4>
-                          <p>
-                            Nullam ac sapien justo. Nam augue mauris, malesuada
-                            non magna sed, feugiat blandit ligula. In tristique
-                            tincidunt purus id iaculis. Pellentesque volutpat
-                            tortor a mauris convallis, sit amet scelerisque
-                            lectus adipiscing.
-                          </p>
-                        </>
-                      ),
-                    },
-                    {
-                      component: (
-                        <>
-                          <h4>Notes</h4>
-                          <p>
-                            Nullam ac sapien justo. Nam augue mauris, malesuada
-                            non magna sed, feugiat blandit ligula. In tristique
-                            tincidunt purus id iaculis. Pellentesque volutpat
-                            tortor a mauris convallis, sit amet scelerisque
-                            lectus adipiscing.
-                          </p>
-                        </>
-                      ),
-                    },
-                  ]}
                 />
+                <TabContent activeTab={this.state.activeTab}>
+                  <ReusableTab id={1}>
+                    <BasicInfo
+                      readOnly={this.state.readOnly}
+                      setReadOnly={() => this.setReadOnly()}
+                    />
+                    <>
+                      <h4>Reviews</h4>
+                      <p>
+                        Nullam ac sapien justo. Nam augue mauris, malesuada non
+                        magna sed, feugiat blandit ligula. In tristique
+                        tincidunt purus id iaculis. Pellentesque volutpat tortor
+                        a mauris convallis, sit amet scelerisque lectus
+                        adipiscing.
+                      </p>
+                    </>
+                  </ReusableTab>
+                  <ReusableTab id={2}>
+                    <>
+                      <h4>SpreadSheet</h4>
+                      <p>
+                        Nullam ac sapien justo. Nam augue mauris, malesuada non
+                        magna sed, feugiat blandit ligula. In tristique
+                        tincidunt purus id iaculis. Pellentesque volutpat tortor
+                        a mauris convallis, sit amet scelerisque lectus
+                        adipiscing.
+                      </p>
+                    </>
+                  </ReusableTab>
+                  <ReusableTab id={3}>
+                    <>
+                      <h4>Comments</h4>
+                      <p>
+                        Nullam ac sapien justo. Nam augue mauris, malesuada non
+                        magna sed, feugiat blandit ligula. In tristique
+                        tincidunt purus id iaculis. Pellentesque volutpat tortor
+                        a mauris convallis, sit amet scelerisque lectus
+                        adipiscing.
+                      </p>
+                    </>
+                  </ReusableTab>
+                  <ReusableTab id={4}>
+                    <>
+                      <h4>Reviews</h4>
+                      <p>
+                        Nullam ac sapien justo. Nam augue mauris, malesuada non
+                        magna sed, feugiat blandit ligula. In tristique
+                        tincidunt purus id iaculis. Pellentesque volutpat tortor
+                        a mauris convallis, sit amet scelerisque lectus
+                        adipiscing.
+                      </p>
+                    </>
+                  </ReusableTab>
+                  <ReusableTab id={5}>
+                    <>
+                      <h4>Sharing</h4>
+                      <p>
+                        Nullam ac sapien justo. Nam augue mauris, malesuada non
+                        magna sed, feugiat blandit ligula. In tristique
+                        tincidunt purus id iaculis. Pellentesque volutpat tortor
+                        a mauris convallis, sit amet scelerisque lectus
+                        adipiscing.
+                      </p>
+                    </>
+                  </ReusableTab>
+                  <ReusableTab id={6}>
+                    <>
+                      <h4>Notes</h4>
+                      <p>
+                        Nullam ac sapien justo. Nam augue mauris, malesuada non
+                        magna sed, feugiat blandit ligula. In tristique
+                        tincidunt purus id iaculis. Pellentesque volutpat tortor
+                        a mauris convallis, sit amet scelerisque lectus
+                        adipiscing.
+                      </p>
+                    </>
+                  </ReusableTab>
+                </TabContent>
               </PanelBody>
             </Panel>
           </div>

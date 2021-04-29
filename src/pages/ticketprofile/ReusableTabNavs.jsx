@@ -1,10 +1,9 @@
-import React, { useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import classnames from "classnames";
-import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
+import { Nav, NavItem, NavLink } from "reactstrap";
 import ActionButton from "./Action";
 
-const ReusableTabs = ({ navprops, tabprops, actions }) => {
-  const [activeTab, setActiveTab] = useState(1);
+const ReusableTabNavs = ({ navprops, actions, activeTab, setActiveTab }) => {
   return (
     <Fragment>
       <div
@@ -56,15 +55,8 @@ const ReusableTabs = ({ navprops, tabprops, actions }) => {
           </div>
         )}
       </div>
-      <TabContent activeTab={activeTab}>
-        {tabprops.map((tabprop, id) => (
-          <TabPane key={id} tabId={id + 1}>
-            {tabprop?.component}
-          </TabPane>
-        ))}
-      </TabContent>
     </Fragment>
   );
 };
 
-export default ReusableTabs;
+export default ReusableTabNavs;
