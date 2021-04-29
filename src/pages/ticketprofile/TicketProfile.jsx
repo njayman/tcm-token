@@ -5,8 +5,10 @@ import {
   Panel,
   PanelHeader,
   PanelBody,
-} from "./../../components/panel/panel.jsx";
+} from "../../components/panel/panel.jsx";
+// import SpreadSheet from "./SpreadSheet";
 import ReusableTabs from "./ReusabeTabs";
+
 // import Actions from "./BasicInfoFields/Action";
 
 //import { Collapse, CardHeader, CardBody, Card } from 'reactstrap';
@@ -23,8 +25,10 @@ class TicketTabs extends React.Component {
     this.state = {
       dropdownOpen: false,
       readOnly: true,
+      // read: true,
     };
-    this.setReadOnly = this.setReadOnly.bind(this);
+    // this.setReadOnly = this.setReadOnly.bind(this);
+    this.toggleRead = this.toggleRead.bind(this);
   }
 
   actions = [
@@ -55,7 +59,9 @@ class TicketTabs extends React.Component {
     },
   ];
 
-  setReadOnly = () => this.setState({ readOnly: !this.state.readOnly });
+  toggleRead = () => this.setState({ read: !this.state.read });
+
+  // setReadOnly = () => this.setState({ readOnly: !this.state.readOnly });
 
   render() {
     return (
@@ -98,7 +104,7 @@ class TicketTabs extends React.Component {
                     {
                       component: (
                         <>
-                          <h4>Data input in spreadsheet</h4>
+                          <h4>Reviews</h4>
                           <p>
                             Nullam ac sapien justo. Nam augue mauris, malesuada
                             non magna sed, feugiat blandit ligula. In tristique

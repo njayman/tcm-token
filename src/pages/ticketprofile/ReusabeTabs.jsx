@@ -17,7 +17,7 @@ const ReusableTabs = ({ navprops, tabprops, actions }) => {
         }}
       >
         <Nav tabs>
-          {navprops?.map((navprop, id) => (
+          {navprops.map((navprop, id) => (
             <NavItem key={id}>
               <NavLink
                 style={{
@@ -57,8 +57,10 @@ const ReusableTabs = ({ navprops, tabprops, actions }) => {
         )}
       </div>
       <TabContent activeTab={activeTab}>
-        {tabprops?.map((tabprop, id) => (
-          <TabPane tabId={id + 1}>{tabprop?.component}</TabPane>
+        {tabprops.map((tabprop, id) => (
+          <TabPane key={id} tabId={id + 1}>
+            {tabprop?.component}
+          </TabPane>
         ))}
       </TabContent>
     </Fragment>
