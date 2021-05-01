@@ -1,104 +1,106 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Spreadsheet from "x-data-spreadsheet";
 import "x-data-spreadsheet/dist/xspreadsheet.css";
 import XLSX from "xlsx";
-const SpreadSheet = ({ sheetData, height, width }) => {
+
+const SpreadSheet = ({ height, width, readOnly }) => {
   const sheetBlock = useRef(null);
-  const [sheetState, setSheetState] = React.useState(sheetData || {});
-  const [read, setRead] = useState(true);
-  const [file, setFile] = useState([]);
-  const filePathset = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    var file = e.target.files[0];
-    console.log(file);
-    setFile(file);
-  };
+  const [sheetState, setSheetState] = React.useState({});
 
-  const convertToJson = (csv) => {
-    var lines = csv.split("\n");
-
-    var result = [];
-
-    var headers = lines[0].split(",");
-
-    for (var i = 1; i < lines.length; i++) {
-      var obj = {};
-      var currentline = lines[i].split(",");
-
-      for (var j = 0; j < headers.length; j++) {
-        obj[headers[j]] = currentline[j];
+  function stox(wb) {
+    var out = [];
+    wb.SheetNames.forEach(function (name) {
+      var o = { name: name, rows: {} };
+      var ws = wb.Sheets[name];
+      var aoa = XLSX.utils.sheet_to_json(ws, { raw: false, header: 1 });
+      aoa.forEach(function (r, i) {
+        var cells = {};
+        r.forEach(function (c, j) {
+          cells[j] = { text: c };
+        });
+        o.rows[i] = { cells: cells };
+      });
+      out.push(o);
+    });
+    return out;
+  }
+  const onFileChangeHandler = (e) => {
+    let excelFile = e.target.files[0];
+    setSheetState(null);
+    if (e.target.files[0]) {
+      if (!excelFile.name.match(/\.(xlsx|xls|csv|xlsm)$/)) {
+        alert("Please Upload Excel File");
+      } else {
+        const data = new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+          var rABS = !!reader.readAsBinaryString;
+          reader.onload = function (e) {
+            var bstr = e.target.result;
+            var wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" });
+            resolve(wb);
+          };
+          if (rABS) reader.readAsBinaryString(excelFile);
+          else reader.readAsArrayBuffer(excelFile);
+        });
+        data.then((exceldata) => {
+          console.log(exceldata);
+          let bc = block.current;
+          bc.innerHTML = "";
+          loadsheet(stox(exceldata));
+          // sheetBlock.current.loadData(stox(exceldata));
+        });
       }
-
-      result.push(obj);
     }
-
-    //return result; //JavaScript object
-    return JSON.stringify(result); //JSON
   };
 
-  const readFile = () => {
-    // var name = file.name;
-    const reader = new FileReader();
-    reader.onload = (evt) => {
-      // evt = on_file_select event
-      /* Parse data */
-      const bstr = evt.target.result;
-      const wb = XLSX.read(bstr, { type: "binary" });
-      /* Get first worksheet */
-      const wsname = wb.SheetNames[0];
-      const ws = wb.Sheets[wsname];
-      /* Convert array of arrays */
-      const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
-      /* Update state */
-      console.log("Data>>>" + data); // shows that excel data is read
-      setSheetState(convertToJson(data)); // shows data in json format
-    };
-    reader.readAsBinaryString(file);
-  };
-
-  let options = {
-    mode: read ? "read" : "edit",
-    showToolbar: !read,
-    showGrid: !read,
-    showContextmenu: !read,
-  };
-  const block = useRef(null);
-  useEffect(() => {
-    sheetBlock.current = new Spreadsheet(block.current, {
+  const loadsheet = (ss) => {
+    sheetBlock.current = new Spreadsheet(block?.current, {
       view: {
         height: () => document.documentElement.clientHeight,
         width: () => document.documentElement.clientWidth,
       },
       ...options,
     })
-      .loadData(sheetState) // load data
+      .loadData(ss)
       .change((data) => {
         setSheetState(data);
         console.log(data);
         // save data to db
       });
+  };
+
+  let options = {
+    mode: "edit",
+    showToolbar: true,
+    showGrid: true,
+    showContextmenu: true,
+  };
+  const block = useRef(null);
+  useEffect(() => {
     let bc = block.current;
+    bc.innerHTML = "";
+    loadsheet(sheetState);
+    // sheetBlock.current // load data
+
     return () => {
       bc.innerHTML = "";
     };
     // eslint-disable-next-line
-  }, [read, sheetState]);
-  useEffect(() => {
-    console.log(file[0]);
-  }, [file]);
+  }, []);
+
+  // useEffect(() => {
+  //   loadsheet(sheetState);
+  // }, [sheetState]);
+
   return (
     <div style={{ height: "100%", width: "100%" }}>
-      <button
+      {/* <button
         className="btn btn-secondary my-2"
-        onClick={() => setRead((r) => !r)}
+        onClick={() => setRe((r) => !r)}
       >
         Toggle mode
-      </button>
-      <input type="file" onChange={filePathset} />
-      <button type="button" onClick={readFile} className="btn btn-default">
-        Upload File
-      </button>
+      </button> */}
+      <input type="file" onChange={onFileChangeHandler} />
       <div
         ref={block}
         className="my-2"
@@ -106,6 +108,8 @@ const SpreadSheet = ({ sheetData, height, width }) => {
           height: height || "100%",
           width: width || "100%",
           overflow: "auto",
+          pointerEvents: `${readOnly ? "none" : ""}`,
+          opacity: `${readOnly ? "0.7" : "1"}`,
         }}
       ></div>
     </div>

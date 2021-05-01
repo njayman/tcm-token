@@ -106,29 +106,12 @@ class TicketTabs extends React.Component {
                       readOnly={this.state.readOnly}
                       setReadOnly={() => this.setReadOnly()}
                     />
-                    <>
-                      <h4>Reviews</h4>
-                      <p>
-                        Nullam ac sapien justo. Nam augue mauris, malesuada non
-                        magna sed, feugiat blandit ligula. In tristique
-                        tincidunt purus id iaculis. Pellentesque volutpat tortor
-                        a mauris convallis, sit amet scelerisque lectus
-                        adipiscing.
-                      </p>
-                    </>
                   </ReusableTab>
                   <ReusableTab id={2} height={"100%"} width={"100%"}>
-                    {/* <>
-                      <h4>SpreadSheet</h4>
-                      <p>
-                        Nullam ac sapien justo. Nam augue mauris, malesuada non
-                        magna sed, feugiat blandit ligula. In tristique
-                        tincidunt purus id iaculis. Pellentesque volutpat tortor
-                        a mauris convallis, sit amet scelerisque lectus
-                        adipiscing.
-                      </p>
-                    </> */}
-                    <Spreadsheet />
+                    <Spreadsheet
+                      readOnly={this.state.readOnly}
+                      setReadOnly={() => this.setReadOnly()}
+                    />
                   </ReusableTab>
                   <ReusableTab id={3}>
                     <>
