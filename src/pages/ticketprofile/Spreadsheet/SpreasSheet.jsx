@@ -38,7 +38,7 @@ const SpreadSheet = ({ sheetData, height, width }) => {
   };
 
   const readFile = () => {
-    var name = file.name;
+    // var name = file.name;
     const reader = new FileReader();
     reader.onload = (evt) => {
       // evt = on_file_select event
@@ -52,7 +52,7 @@ const SpreadSheet = ({ sheetData, height, width }) => {
       const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
       /* Update state */
       console.log("Data>>>" + data); // shows that excel data is read
-      setSheetState(data); // shows data in json format
+      setSheetState(convertToJson(data)); // shows data in json format
     };
     reader.readAsBinaryString(file);
   };
