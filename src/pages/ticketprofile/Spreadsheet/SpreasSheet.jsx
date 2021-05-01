@@ -3,9 +3,9 @@ import Spreadsheet from "x-data-spreadsheet";
 import "x-data-spreadsheet/dist/xspreadsheet.css";
 import XLSX from "xlsx";
 
-const SpreadSheet = ({ height, width, readOnly }) => {
+const SpreadSheet = ({ height, width, readOnly, sampleData }) => {
   const sheetBlock = useRef(null);
-  const [sheetState, setSheetState] = React.useState({});
+  const [sheetState, setSheetState] = React.useState(sampleData || {});
 
   function stox(wb) {
     var out = [];
@@ -100,7 +100,19 @@ const SpreadSheet = ({ height, width, readOnly }) => {
       >
         Toggle mode
       </button> */}
-      <input type="file" onChange={onFileChangeHandler} />
+      <div className="my-3" style={{ width: "300px" }}>
+        <div className="custom-file">
+          <input
+            type="file"
+            name="customFile"
+            className="custom-file-input"
+            onChange={onFileChangeHandler}
+          />
+          <label className="custom-file-label" for="customFile">
+            Choose a spreadsheet file
+          </label>
+        </div>
+      </div>
       <div
         ref={block}
         className="my-2"
