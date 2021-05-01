@@ -117,7 +117,7 @@ class TicketTabs extends React.Component {
                       </p>
                     </>
                   </ReusableTab>
-                  <ReusableTab id={2}>
+                  <ReusableTab id={2} height={"100%"} width={"100%"}>
                     {/* <>
                       <h4>SpreadSheet</h4>
                       <p>
@@ -128,16 +128,7 @@ class TicketTabs extends React.Component {
                         adipiscing.
                       </p>
                     </> */}
-                    <Spreadsheet
-                      read={this.state.read}
-                      toggleRead={() => this.toggleRead()}
-                      options={{
-                        mode: this.state.read ? "read" : "edit",
-                        showToolbar: !this.state.read,
-                        showGrid: !this.state.read,
-                        showContextmenu: !this.state.read,
-                      }}
-                    />
+                    <Spreadsheet />
                   </ReusableTab>
                   <ReusableTab id={3}>
                     <>
