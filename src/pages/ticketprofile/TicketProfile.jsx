@@ -10,6 +10,7 @@ import {
 import ReusableTabNavs from "./ReusableTabNavs";
 import ReusableTab from "./ReusableTab";
 import { TabContent } from "reactstrap";
+import Spreadsheet from "./Spreadsheet/SpreasSheet";
 
 // import Actions from "./BasicInfoFields/Action";
 
@@ -28,6 +29,7 @@ class TicketTabs extends React.Component {
       dropdownOpen: false,
       readOnly: true,
       activeTab: 1,
+      read: true,
     };
     this.setReadOnly = this.setReadOnly.bind(this);
     this.setActiveTab = this.setActiveTab.bind(this);
@@ -116,7 +118,7 @@ class TicketTabs extends React.Component {
                     </>
                   </ReusableTab>
                   <ReusableTab id={2}>
-                    <>
+                    {/* <>
                       <h4>SpreadSheet</h4>
                       <p>
                         Nullam ac sapien justo. Nam augue mauris, malesuada non
@@ -125,7 +127,17 @@ class TicketTabs extends React.Component {
                         a mauris convallis, sit amet scelerisque lectus
                         adipiscing.
                       </p>
-                    </>
+                    </> */}
+                    <Spreadsheet
+                      read={this.state.read}
+                      toggleRead={() => this.toggleRead()}
+                      options={{
+                        mode: this.state.read ? "read" : "edit",
+                        showToolbar: !this.state.read,
+                        showGrid: !this.state.read,
+                        showContextmenu: !this.state.read,
+                      }}
+                    />
                   </ReusableTab>
                   <ReusableTab id={3}>
                     <>
