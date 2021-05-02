@@ -1,12 +1,21 @@
-import React, { useEffect, useRef } from "react";
-import Spreadsheet from "x-data-spreadsheet";
+import React, { Suspense, useRef } from "react";
 import "x-data-spreadsheet/dist/xspreadsheet.css";
 import XLSX from "xlsx";
+import Spreadsheet from "x-data-spreadsheet";
+const SpreadsheetEditor = React.lazy(() => import("./SpreadsheetEditor"));
 
 const SpreadSheet = ({ height, width, readOnly, sampleData }) => {
+  const [sheetState, setSheetState] = React.useState(
+    sampleData || [{ name: "Sheet" }]
+  );
+  const block = useRef(null);
   const sheetBlock = useRef(null);
-  const [sheetState, setSheetState] = React.useState(sampleData || {});
-
+  let options = {
+    mode: "edit",
+    showToolbar: true,
+    showGrid: true,
+    // showContextmenu: true,
+  };
   function stox(wb) {
     var out = [];
     wb.SheetNames.forEach(function (name) {
@@ -47,6 +56,7 @@ const SpreadSheet = ({ height, width, readOnly, sampleData }) => {
           let bc = block.current;
           bc.innerHTML = "";
           loadsheet(stox(exceldata));
+          // console.log(stox(exceldata));
           // sheetBlock.current.loadData(stox(exceldata));
         });
       }
@@ -69,29 +79,6 @@ const SpreadSheet = ({ height, width, readOnly, sampleData }) => {
       });
   };
 
-  let options = {
-    mode: "edit",
-    showToolbar: true,
-    showGrid: true,
-    showContextmenu: true,
-  };
-  const block = useRef(null);
-  useEffect(() => {
-    let bc = block.current;
-    bc.innerHTML = "";
-    loadsheet(sheetState);
-    // sheetBlock.current // load data
-
-    return () => {
-      bc.innerHTML = "";
-    };
-    // eslint-disable-next-line
-  }, []);
-
-  // useEffect(() => {
-  //   loadsheet(sheetState);
-  // }, [sheetState]);
-
   return (
     <div style={{ height: "100%", width: "100%" }}>
       {/* <button
@@ -108,22 +95,20 @@ const SpreadSheet = ({ height, width, readOnly, sampleData }) => {
             className="custom-file-input"
             onChange={onFileChangeHandler}
           />
-          <label className="custom-file-label" for="customFile">
+          <label className="custom-file-label" htmlFor="customFile">
             Choose a spreadsheet file
           </label>
         </div>
       </div>
-      <div
-        ref={block}
-        className="my-2"
-        style={{
-          height: height || "100%",
-          width: width || "100%",
-          overflow: "auto",
-          pointerEvents: `${readOnly ? "none" : ""}`,
-          opacity: `${readOnly ? "0.7" : "1"}`,
-        }}
-      ></div>
+      <Suspense fallback={<p>loading . . .</p>}>
+        <SpreadsheetEditor
+          block={block}
+          readOnly={readOnly}
+          loadsheet={(s) => loadsheet(s)}
+          sheetState={sheetState}
+          sheetBlock={sheetBlock}
+        />
+      </Suspense>
     </div>
   );
 };
