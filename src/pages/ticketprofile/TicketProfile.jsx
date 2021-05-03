@@ -110,7 +110,7 @@ class TicketTabs extends React.Component {
                   <ReusableTab id={2} height={"100%"} width={"100%"}>
                     <Spreadsheet
                       readOnly={this.state.readOnly}
-                      setReadOnly={() => this.setReadOnly()}
+                      // setReadOnly={() => this.setReadOnly()}
                     />
                   </ReusableTab>
                   <ReusableTab id={3}>

@@ -1,21 +1,14 @@
-import React, { Suspense, useRef } from "react";
-import "x-data-spreadsheet/dist/xspreadsheet.css";
+import React, { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import XLSX from "xlsx";
-import Spreadsheet from "x-data-spreadsheet";
-const SpreadsheetEditor = React.lazy(() => import("./SpreadsheetEditor"));
+import SpreadsheetEditor from "./SpreadsheetEditor";
+import SpreadsheetReader from "./SpreadsheetReader";
+// const SpreadsheetEditor = React.lazy(() => import("./SpreadsheetEditor"));
+// const SpreadsheetReader = React.lazy(() => import("./SpreadsheetReader"));
 
-const SpreadSheet = ({ height, width, readOnly, sampleData }) => {
-  const [sheetState, setSheetState] = React.useState(
-    sampleData || [{ name: "Sheet" }]
-  );
-  const block = useRef(null);
-  const sheetBlock = useRef(null);
-  let options = {
-    mode: "edit",
-    showToolbar: true,
-    showGrid: true,
-    // showContextmenu: true,
-  };
+const SpreadSheet = ({ readOnly }) => {
+  const [loadSheet, setLoadSheet] = useState(true);
+  const [sheetState, setSheetState] = useState({});
   function stox(wb) {
     var out = [];
     wb.SheetNames.forEach(function (name) {
@@ -35,7 +28,7 @@ const SpreadSheet = ({ height, width, readOnly, sampleData }) => {
   }
   const onFileChangeHandler = (e) => {
     let excelFile = e.target.files[0];
-    setSheetState(null);
+    // setSheetState(null);
     if (e.target.files[0]) {
       if (!excelFile.name.match(/\.(xlsx|xls|csv|xlsm)$/)) {
         alert("Please Upload Excel File");
@@ -53,32 +46,23 @@ const SpreadSheet = ({ height, width, readOnly, sampleData }) => {
         });
         data.then((exceldata) => {
           console.log(exceldata);
-          let bc = block.current;
-          bc.innerHTML = "";
-          loadsheet(stox(exceldata));
+          setSheetState(stox(exceldata));
+          setLoadSheet(false);
+          setLoadSheet(true);
           // console.log(stox(exceldata));
           // sheetBlock.current.loadData(stox(exceldata));
         });
       }
     }
   };
+  // useEffect(() => {
+  //   setLoadSheet((ls) => !ls);
+  //   setLoadSheet((ls) => !ls);
+  // }, [readOnly]);
 
-  const loadsheet = (ss) => {
-    sheetBlock.current = new Spreadsheet(block?.current, {
-      view: {
-        height: () => document.documentElement.clientHeight,
-        width: () => document.documentElement.clientWidth,
-      },
-      ...options,
-    })
-      .loadData(ss)
-      .change((data) => {
-        setSheetState(data);
-        console.log(data);
-        // save data to db
-      });
-  };
-
+  useEffect(() => {
+    console.log(sheetState);
+  }, [sheetState]);
   return (
     <div style={{ height: "100%", width: "100%" }}>
       {/* <button
@@ -100,15 +84,21 @@ const SpreadSheet = ({ height, width, readOnly, sampleData }) => {
           </label>
         </div>
       </div>
-      <Suspense fallback={<p>loading . . .</p>}>
-        <SpreadsheetEditor
-          block={block}
-          readOnly={readOnly}
-          loadsheet={(s) => loadsheet(s)}
-          sheetState={sheetState}
-          sheetBlock={sheetBlock}
-        />
-      </Suspense>
+      {loadSheet && (
+        <>
+          {readOnly ? (
+            <SpreadsheetReader
+              sheetState={sheetState}
+              setSheetState={(ss) => setSheetState(ss)}
+            />
+          ) : (
+            <SpreadsheetEditor
+              sheetState={sheetState}
+              setSheetState={(ss) => setSheetState(ss)}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 };
