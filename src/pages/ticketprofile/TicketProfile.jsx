@@ -10,7 +10,7 @@ import {
 import ReusableTabNavs from "./ReusableTabNavs";
 import ReusableTab from "./ReusableTab";
 import { TabContent } from "reactstrap";
-import Spreadsheet from "./Spreadsheet/SpreasSheet";
+import Spreadsheet from "./Spreadsheet/SpreadSheet";
 
 // import Actions from "./BasicInfoFields/Action";
 
