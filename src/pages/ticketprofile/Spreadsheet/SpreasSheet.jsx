@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+// import { useEffect } from "react/cjs/react.development";
 import XLSX from "xlsx";
 import SpreadsheetEditor from "./SpreadsheetEditor";
 import SpreadsheetReader from "./SpreadsheetReader";
 // const SpreadsheetEditor = React.lazy(() => import("./SpreadsheetEditor"));
 // const SpreadsheetReader = React.lazy(() => import("./SpreadsheetReader"));
 
-const SpreadSheet = ({ readOnly }) => {
-  const [loadSheet, setLoadSheet] = useState(true);
+const SpreadSheet = ({ readOnly, setReadOnly }) => {
   const [sheetState, setSheetState] = useState({});
   function stox(wb) {
     var out = [];
@@ -28,7 +27,7 @@ const SpreadSheet = ({ readOnly }) => {
   }
   const onFileChangeHandler = (e) => {
     let excelFile = e.target.files[0];
-    // setSheetState(null);
+    setSheetState(null);
     if (e.target.files[0]) {
       if (!excelFile.name.match(/\.(xlsx|xls|csv|xlsm)$/)) {
         alert("Please Upload Excel File");
@@ -47,30 +46,16 @@ const SpreadSheet = ({ readOnly }) => {
         data.then((exceldata) => {
           console.log(exceldata);
           setSheetState(stox(exceldata));
-          setLoadSheet(false);
-          setLoadSheet(true);
-          // console.log(stox(exceldata));
-          // sheetBlock.current.loadData(stox(exceldata));
+          if (readOnly) {
+            setReadOnly();
+          }
         });
       }
     }
   };
-  // useEffect(() => {
-  //   setLoadSheet((ls) => !ls);
-  //   setLoadSheet((ls) => !ls);
-  // }, [readOnly]);
 
-  useEffect(() => {
-    console.log(sheetState);
-  }, [sheetState]);
   return (
     <div style={{ height: "100%", width: "100%" }}>
-      {/* <button
-        className="btn btn-secondary my-2"
-        onClick={() => setRe((r) => !r)}
-      >
-        Toggle mode
-      </button> */}
       <div className="my-3" style={{ width: "300px" }}>
         <div className="custom-file">
           <input
@@ -84,21 +69,19 @@ const SpreadSheet = ({ readOnly }) => {
           </label>
         </div>
       </div>
-      {loadSheet && (
-        <>
-          {readOnly ? (
-            <SpreadsheetReader
-              sheetState={sheetState}
-              setSheetState={(ss) => setSheetState(ss)}
-            />
-          ) : (
-            <SpreadsheetEditor
-              sheetState={sheetState}
-              setSheetState={(ss) => setSheetState(ss)}
-            />
-          )}
-        </>
-      )}
+      <>
+        {readOnly ? (
+          <SpreadsheetReader
+            sheetState={sheetState}
+            setSheetState={(ss) => setSheetState(ss)}
+          />
+        ) : (
+          <SpreadsheetEditor
+            sheetState={sheetState}
+            setSheetState={(ss) => setSheetState(ss)}
+          />
+        )}
+      </>
     </div>
   );
 };
