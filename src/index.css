@@ -13,3 +13,7 @@
 .x-spreadsheet-sheet {
   width: 100% !important;
 }
+
+.x-spreadsheet * {
+  scroll-behavior: auto;
+}

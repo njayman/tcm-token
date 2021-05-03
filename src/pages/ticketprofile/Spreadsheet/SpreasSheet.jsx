@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 // import { useEffect } from "react/cjs/react.development";
 import XLSX from "xlsx";
 import SpreadsheetEditor from "./SpreadsheetEditor";
@@ -53,6 +54,10 @@ const SpreadSheet = ({ readOnly, setReadOnly }) => {
       }
     }
   };
+
+  useEffect(() => {
+    console.log(sheetState);
+  }, [sheetState]);
 
   return (
     <div style={{ height: "100%", width: "100%" }}>

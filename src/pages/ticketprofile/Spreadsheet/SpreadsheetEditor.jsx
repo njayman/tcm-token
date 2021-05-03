@@ -16,7 +16,10 @@ export default function SpreadsheetEditor({ sheetState, setSheetState }) {
     })
       .loadData(sheetState)
       .change((data) => {
-        setSheetState(data);
+        let newSheets = sheetState;
+        let idx = sheetState.findIndex((sheet) => sheet.name === data.name);
+        newSheets[idx] = data;
+        setSheetState(newSheets);
         // console.log(data);
       });
     let bc = block.current;
